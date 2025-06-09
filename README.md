@@ -7,7 +7,7 @@ See descriptions for file contents below. Thank you for looking!
 * Repo being used for current OpenGL studies, with textured cubes rotating (Following https://learnopengl.com/Getting-started/Hello-Window).
 
 ## Networking
-* Complete stack for connecting multiple mobile devices and their gyroscopes to control marbles in a Unity game.
+* Complete stack for connecting numerous mobile devices and their gyroscopes to control marbles in a Unity game.
 
 ## C++ GUI
 * File explorer being used for an upcoming ARG Steam release.
