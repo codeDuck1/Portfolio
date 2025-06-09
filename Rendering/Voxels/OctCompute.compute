@@ -1,0 +1,83 @@
+// Processes leaf nodes from octree and generates transformation matrices
+// and colors used by fragment and vertex shaders.
+#pragma kernel CSMain
+
+// LeafNode structure matching the C# structure
+struct LeafNode
+{
+    uint NodeId;
+    float3 Center;
+    float3 Extents;
+    int ObjectCount;
+    int Depth;
+};
+
+// Must match in compute/vertex shaders
+struct RenderNode
+{
+    float4x4 transform;
+    float4 color;
+};
+
+// Buffers
+StructuredBuffer<LeafNode> leavesBuffer;           // Input: Leaf nodes from octree
+RWStructuredBuffer<RenderNode> transformBuffer;    // Output: Transformation matrices sent to vertex shader
+
+
+uint currLeafTotal;
+uint maxNodeDepth;
+
+float4 baseColor;
+float4 depthColorFactor;         
+
+
+// Helper function to create a transformation matrix 
+float4x4 CreateTRSMatrix(float3 position, float3 scale) {
+    return float4x4(
+        float4(scale.x, 0, 0, 0),
+        float4(0, scale.y, 0, 0),
+        float4(0, 0, scale.z, 0),
+        float4(position.x, position.y, position.z, 1)
+    );
+}
+
+
+// Function to generate color based on depth
+float4 GetColorByDepth(int depth) {
+    float t = (float)depth / (float)maxNodeDepth;
+    return lerp(baseColor, depthColorFactor, t);
+}
+
+[numthreads(256,1,1)]
+void CSMain(uint3 id : SV_DispatchThreadID) {
+    // Early exit if thread ID is beyond the number of leaf nodes
+    if (id.x >= currLeafTotal)
+        return;
+    
+    // Get the current leaf node
+    LeafNode node = leavesBuffer[id.x];
+
+    // Prepare to create a node for sending to fragment shader by buffer.
+    RenderNode renderNode;
+
+    // Create transformation matrix for the node
+    float3 scale = node.Extents * 2.0; // Extents * 2 for full size 
+    // Store the transformation matrix
+    // The matrix needs to be transposed when set for vertex shader
+    float4x4 trs = CreateTRSMatrix(node.Center, scale);
+    renderNode.transform = transpose(trs);
+
+    float4 nodeColor;
+    nodeColor = GetColorByDepth(node.Depth);
+    renderNode.color = nodeColor;
+
+    transformBuffer[id.x] = renderNode;
+}
+
+
+
+
+
+
+
+
