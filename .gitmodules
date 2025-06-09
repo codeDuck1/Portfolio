@@ -10,3 +10,6 @@
 [submodule "Python/Battle_Ship"]
 	path = Python/Battle_Ship
 	url = https://github.com/codeDuck1/Battle_Ship.git
+[submodule "Graphics/LearnOpenGL/FirstOpenGL"]
+	path = Graphics/LearnOpenGL/FirstOpenGL
+	url = https://github.com/jaysdevwork/FirstOpenGL.git
