@@ -1,5 +1,6 @@
 # Jay Sifuentes Portfolio
-See descriptions for file contents below. Thank you for looking!
+See descriptions for file contents below. Project video and overviews at https://www.jayswork.dev/projects. Thank you for looking!
+
 
 ## Graphics
 * Voxel Octree rendering with destruction in Unity via shaders.
