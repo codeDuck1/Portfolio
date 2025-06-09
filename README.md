@@ -9,7 +9,7 @@ See descriptions for file contents below. Thank you for looking!
 ## Networking
 * Complete stack for connecting multiple mobile devices and their gyroscopes to control marbles in a Unity game.
 
-## C++ GUIS
+## C++ GUIs
 * File explorer being used for an upcoming ARG Steam release.
 * Jack-In-The-Box with realistic mechanics programmed atop a keyframe animation system. Done for my software development class.
 
