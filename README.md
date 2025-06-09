@@ -1,13 +1,13 @@
-# Jay Portfolio
+# Portfolio
 See descriptions for file contents below. Thank you for looking!
 
 ## Graphics
-* Voxel Octree rendering with destruction in Unity via GPU instancing.
+* Voxel Octree rendering with destruction in Unity via shaders.
 * Ray Tracing in Unity, rendering spheres with realistic reflections and anti-aliasing via shaders (Followed https://www.gamedeveloper.com/programming/gpu-ray-tracing-in-unity-part-1).
 * Repo being used for current OpenGL studies, with textured cubes rotating (Following https://learnopengl.com/Getting-started/Hello-Window).
 
 ## Networking
-* Complete stack for connecting numerous mobile devices and their gyroscopes to control marbles in a Unity game.
+* Complete stack for connecting multiple mobile devices and their gyroscopes to control marbles in a Unity game.
 
 ## C++ GUIS
 * File explorer being used for an upcoming ARG Steam release.
