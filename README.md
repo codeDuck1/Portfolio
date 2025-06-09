@@ -3,7 +3,7 @@ See descriptions for file contents below. Project video and overviews at https:/
 
 
 ## Graphics
-* Voxel Octree rendering with destruction in Unity via shaders.
+* Voxel Octree rendering with destruction in Unity via GPU instancing.
 * Ray Tracing in Unity, rendering spheres with realistic reflections and anti-aliasing via shaders (Followed https://www.gamedeveloper.com/programming/gpu-ray-tracing-in-unity-part-1).
 * Repo being used for current OpenGL studies, with textured cubes rotating (Following https://learnopengl.com/).
 
