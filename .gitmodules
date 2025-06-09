@@ -4,3 +4,6 @@
 [submodule "Rendering/LearnOpenGL/FirstOpenGL"]
 	path = Rendering/LearnOpenGL/FirstOpenGL
 	url = https://github.com/jaysdevwork/FirstOpenGL.git
+[submodule "C++GUI/FileExplorer/File_Explorer"]
+	path = C++GUI/FileExplorer/File_Explorer
+	url = https://github.com/codeDuck1/File_Explorer.git
