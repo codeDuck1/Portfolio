@@ -1,4 +1,4 @@
-# Jay's Portfolio
+# Jay Sifuentes Portfolio
 See descriptions for file contents below. Thank you for looking!
 
 ## Graphics
