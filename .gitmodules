@@ -1,3 +1,6 @@
 [submodule "Rendering/FirstOpenGL"]
 	path = Rendering/FirstOpenGL
 	url = https://github.com/jaysdevwork/FirstOpenGL.git
+[submodule "Rendering/LearnOpenGL/FirstOpenGL"]
+	path = Rendering/LearnOpenGL/FirstOpenGL
+	url = https://github.com/jaysdevwork/FirstOpenGL.git
