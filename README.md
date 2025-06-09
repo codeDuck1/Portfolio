@@ -14,7 +14,7 @@ See descriptions for file contents below. Thank you for looking!
 * Jack-In-The-Box with realistic mechanics programmed atop a keyframe animation system. Done for my software development class.
 
 ## Python
-* 2 player battle ship that can be played in CLI.
+* 2 player battle ship that can be played in CLI. Done for my Python programming class.
 
 ## UnityGame
 * Sample from turn-based strategy game.
