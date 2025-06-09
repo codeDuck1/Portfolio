@@ -1,0 +1,193 @@
+// Each #kernel tells which function to compile; you can have many kernels
+#pragma kernel CSMain
+
+// Create a RenderTexture with enableRandomWrite flag and set it
+// with cs.SetTexture
+RWTexture2D<float4> Result;
+float4x4 _CameraToWorld;
+float4x4 _CameraInverseProjection;
+
+Texture2D _SkyboxTexture;
+SamplerState sampler_SkyboxTexture;
+static const float PI = 3.14159265f;
+
+float2 _PixelOffset;
+
+struct Ray
+{
+    float3 origin;
+    float3 direction;
+    float3 energy;
+};
+
+
+Ray CreateRay(float3 origin, float3 direction)
+{
+    Ray ray;
+    ray.origin = origin;
+    ray.direction = direction;
+    ray.energy = float3(1.0f, 1.0f, 1.0f); // ray starts with full throughput on all color channels and diminishes with each reflection
+    return ray;
+}
+
+struct RayHit
+{
+    float3 position;
+    float distance; // distance along the ray
+    float3 normal;
+};
+
+RayHit CreateRayHit()
+{
+    RayHit hit;
+    hit.position = float3(0.0f, 0.0f, 0.0f);
+    hit.distance = 1.#INF;
+    hit.normal = float3(0.0f, 0.0f, 0.0f);
+    return hit;
+}
+
+void IntersectSphere(Ray ray, inout RayHit bestHit, float4 sphere)
+{
+    // Calculate distance along the ray where the sphere is
+    float3 d = ray.origin - sphere.xyz;
+    float p1 = -dot(ray.direction, d);
+    float p2sqr = p1 * p1 - dot(d,d) + sphere.w * sphere.w;
+    if(p2sqr < 0)
+        return;
+    float p2 = sqrt(p2sqr);
+    float t = p1 - p2 > 0 ? p1 - p2 : p1 + p2;
+
+    if(t > 0 && t < bestHit.distance)
+    {
+        bestHit.distance = t;
+        bestHit.position = ray.origin + t * ray.direction;
+        bestHit.normal = normalize(bestHit.position - sphere.xyz);
+    }
+}
+
+// pass rayhit with inout qualifier to modify original struct, not a copy
+void IntersectGroundPlane(Ray ray, inout RayHit bestHit)
+{
+    // Calculate distance along the ray where the ground plane is intersected
+    float t = -ray.origin.y / ray.direction.y;
+    if (t > 0 && t < bestHit.distance)
+    {
+        bestHit.distance = t;
+        bestHit.position = ray.origin + t * ray.direction;
+        bestHit.normal = float3(0.0f, 1.0f, 0.0f);
+    }
+}
+
+RayHit Trace(Ray ray)
+{
+    RayHit bestHit = CreateRayHit();
+    IntersectGroundPlane(ray, bestHit);
+
+    // Add a floating unit sphere
+    IntersectSphere(ray, bestHit, float4(0, 3.0f, 0, 1.0f));
+    // Add some random spheres of different sizes
+    IntersectSphere(ray, bestHit, float4(-4.0f, 1.0f, -4.0f, 1.0f));
+    IntersectSphere(ray, bestHit, float4(4.0f, 1.5f, 3.0f, 1.5f));
+    IntersectSphere(ray, bestHit, float4(-2.0f, 1.0f, 6.0f, 1.0f));
+    IntersectSphere(ray, bestHit, float4(3.0f, 0.5f, -3.0f, 0.5f));
+    IntersectSphere(ray, bestHit, float4(-5.0f, 1.2f, 2.0f, 1.2f));
+    
+    // Add a few floating spheres at different heights
+    IntersectSphere(ray, bestHit, float4(0.0f, 6.0f, 5.0f, 1.3f));
+    IntersectSphere(ray, bestHit, float4(-3.0f, 5.0f, -2.0f, 0.7f));
+    IntersectSphere(ray, bestHit, float4(4.0f, 4.0f, 0.0f, 1.0f));
+
+    return bestHit;
+}
+
+// ray by ref
+float3 Shade(inout Ray ray, RayHit hit)
+{
+    if(hit.distance < 1.#INF) // less than infinity
+    {
+        float3 specular = float3(0.6f, 0.6f, 0.6f);
+        // Reflect the ray and multiply energy with specular reflection
+        ray.origin = hit.position + hit.normal * 0.001f; // small offset to prevent self-occulision bc floatpoint inaccuracy
+        ray.direction = reflect(ray.direction, hit.normal);
+        ray.energy *= specular;
+
+        // Return nothing 
+        return float3(0.0f, 0.0f, 0.0f);
+    }
+    else // fallback to skybox sampling 
+    {
+        // Erase the ray's energy bc sky doesnt reflect anything
+        ray.energy = 0.0f;
+
+        // Sample the skybox and write it
+        // Transform our cartesian direction vector to spherical coordinates
+        // And map this to texture coordinates
+        float theta = acos(ray.direction.y) / -PI;
+        float phi = atan2(ray.direction.x, -ray.direction.z) / -PI * 0.5f;
+        float skyboxBrightness = 1.5f;
+        return _SkyboxTexture.SampleLevel(sampler_SkyboxTexture, float2(phi, theta), 0).xyz * skyboxBrightness;
+    }
+}
+
+
+
+Ray CreateCameraRay(float2 uv)
+{
+    // Transform camera origin to world space
+    float3 origin = mul(_CameraToWorld, float4(0.0f, 0.0f, 0.0f, 1.0f)).xyz;
+
+    // Invert the perspective projection of the view-space position
+    float3 direction = mul(_CameraInverseProjection, float4(uv, 0.0f, 1.0f)).xyz;
+    // Transform the direction from camera to world space and normalize
+    direction = mul(_CameraToWorld, float4(direction, 0.0f)).xyz;
+    direction = normalize(direction);
+
+    return CreateRay(origin, direction);
+}
+
+
+
+
+
+// For each screen pixel's center, we calculate the origin and direction of the ray.
+// Output the latter (direction) as color.
+[numthreads(8,8,1)]
+void CSMain (uint3 id : SV_DispatchThreadID)
+{
+    // Get dimensions of the RenderTexture
+    uint width, height;
+    Result.GetDimensions(width, height);
+
+    // Transform pixel to [-1, 1] range
+    float2 uv = float2((id.xy + _PixelOffset) / float2(width, height) * 2.0f - 1.0f);
+
+    // Get a ray for the UVs
+    Ray ray = CreateCameraRay(uv);
+
+    // Trace and shade
+    // (original code)
+    // RayHit hit = Trace(ray);
+    // float3 result = Shade(ray, hit);
+    // execute a max of 8 traces, original ray + 7 bounces
+    // for example, imagine a ray reflected once lost 3/4 of its energy. now it travels on and hits sky,
+    // so we only transfer 1/4 of the energy of the sky hit to the pixel.
+    float3 result = float3(0,0,0);
+
+    for(int i = 0; i < 8; i++)
+    {
+        RayHit hit = Trace(ray);
+        result += ray.energy * Shade(ray, hit);
+        if(!any(ray.energy)) // returns true if all components are 0
+        {
+            break;
+        }
+    }
+
+    
+    Result[id.xy] = float4(result, 1);
+
+    // for skybox only
+    // float theta = acos(ray.direction.y) / -PI;
+    // float phi = atan2(ray.direction.x, -ray.direction.z) / -PI * 0.5f;
+    // Result[id.xy] = _SkyboxTexture.SampleLevel(sampler_SkyboxTexture, float2(phi, theta),0);
+}
