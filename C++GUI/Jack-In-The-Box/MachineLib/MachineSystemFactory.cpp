@@ -8,6 +8,8 @@
 
 #include "pch.h"
 #include "MachineSystemFactory.h"
+
+#include "MachineSystem.h"
 #include "MachineSystemStandin.h"
 
 /**
@@ -29,5 +31,5 @@ MachineSystemFactory::MachineSystemFactory(std::wstring resourcesDir) :
  */
 std::shared_ptr<IMachineSystem> MachineSystemFactory::CreateMachineSystem()
 {
-    return std::make_shared<MachineSystemStandin>();
+    return std::make_shared<MachineSystem>(mResourcesDir);
 }

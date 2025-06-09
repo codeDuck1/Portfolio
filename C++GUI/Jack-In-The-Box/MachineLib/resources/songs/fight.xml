@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<song beats="2">
+    <sounds>
+        <sound note="g3" file="691802__hollandm__g3-hard-kalimba.wav" />
+        <sound note="a3" file="691772__hollandm__a3-hard-kalimba.wav" />
+        <sound note="b3" file="691776__hollandm__b3-hard-kalimba.wav" />
+        <sound note="c4" file="691782__hollandm__c4-hard-kalimba.wav" />
+        <sound note="d4" file="691788__hollandm__d4-hard-kalimba.wav" />
+        <sound note="e4" file="691794__hollandm__e4-hard-kalimba.wav" />
+        <sound note="f4" file="691800__hollandm__f4-hard-kalimba.wav" />
+    </sounds>
+    <notes>
+        <note measure="1" beat="2" note="e4"/>
+
+        <note measure="2" beat="1" note="e4"/>
+        <note measure="2" beat="2" note="g3"/>
+
+        <note measure="3" beat="1" note="a3"/>
+        <note measure="3" beat="2" note="b3"/>
+
+        <note measure="4" beat="1" note="c4"/>
+        <note measure="4" beat="2" note="e4"/>
+        <note measure="5" beat="2" note="e4"/>
+
+        <note measure="6" beat="1" note="e4"/>
+        <note measure="6" beat="2" note="g3"/>
+        <note measure="7" beat="1" note="a3"/>
+        <note measure="7" beat="2" note="b3"/>
+
+        <note measure="8" beat="1" note="c4"/>
+        <note measure="9" beat="2" note="c4"/>
+
+        <note measure="10" beat="1" note="e4"/>
+        <note measure="10" beat="2" note="d4"/>
+        <note measure="11" beat="1" note="e4"/>
+        <note measure="11" beat="2" note="d4"/>
+
+        <note measure="12" beat="1" note="c4"/>
+        <note measure="12" beat="2" note="g3"/>
+        <note measure="13" beat="2" note="e4"/>
+
+        <note measure="14" beat="1" note="d4"/>
+        <note measure="14" beat="2" note="a3"/>
+        <note measure="15" beat="1" note="e4"/>
+        <note measure="15" beat="2" note="d4"/>
+
+        <note measure="16" beat="1" note="c4"/>
+
+    </notes>
+</song>

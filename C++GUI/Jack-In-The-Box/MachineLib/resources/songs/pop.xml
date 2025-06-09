@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<song beats="4">
+    <sounds>
+        <sound note="g3" file="691802__hollandm__g3-hard-kalimba.wav" />
+        <sound note="a3" file="691772__hollandm__a3-hard-kalimba.wav" />
+        <sound note="b3" file="691776__hollandm__b3-hard-kalimba.wav" />
+        <sound note="c4" file="691782__hollandm__c4-hard-kalimba.wav" />
+        <sound note="d4" file="691788__hollandm__d4-hard-kalimba.wav" />
+        <sound note="e4" file="691794__hollandm__e4-hard-kalimba.wav" />
+        <sound note="f4" file="691800__hollandm__f4-hard-kalimba.wav" />
+        <sound note="g4" file="691804__hollandm__g4-hard-kalimba.wav" />
+    </sounds>
+    <notes>
+        <note measure="1" beat="1.01" note="c4"/>
+        <note measure="1" beat="1.66" note="c4"/>
+        <note measure="1" beat="2" note="d4"/>
+        <note measure="1" beat="2.66" note="d4"/>
+        <note measure="1" beat="3" note="e4"/>
+        <note measure="1" beat="3.33" note="g4"/>
+        <note measure="1" beat="3.6" note="e4"/>
+        <note measure="1" beat="4" note="c4"/>
+        <note measure="1" beat="4.66" note="g3"/>
+
+        <note measure="2" beat="1" note="c4"/>
+        <note measure="2" beat="1.66" note="c4"/>
+        <note measure="2" beat="2" note="d4"/>
+        <note measure="2" beat="2.66" note="d4"/>
+        <note measure="2" beat="3" note="e4"/>
+        <note measure="2" beat="4" note="c4"/>
+        <note measure="2" beat="4.66" note="g3"/>
+
+        <note measure="3" beat="1.01" note="c4"/>
+        <note measure="3" beat="1.66" note="c4"/>
+        <note measure="3" beat="2" note="d4"/>
+        <note measure="3" beat="2.66" note="d4"/>
+        <note measure="3" beat="3" note="e4"/>
+        <note measure="3" beat="3.33" note="g4"/>
+        <note measure="3" beat="3.6" note="e4"/>
+        <note measure="3" beat="4" note="c4"/>
+
+        <note measure="4" beat="1" note="g4"/>
+        <note measure="4" beat="2" note="d4"/>
+        <note measure="4" beat="2.66" note="f4"/>
+        <note measure="4" beat="3" note="e4"/>
+        <note measure="4" beat="4" note="c4"/>
+
+    </notes>
+</song>

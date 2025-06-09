@@ -16,6 +16,36 @@ set(SOURCE_FILES
         Polygon.h
         Cylinder.cpp
         Cylinder.h
+        MachineSystem.cpp
+        MachineSystem.h
+        Machine.cpp
+        Machine.h
+        MachineCFactory.h
+        MachineCFactory.cpp
+        Component.cpp
+        Component.h
+        Box.cpp
+        Box.h
+        Sparty.cpp
+        Sparty.h
+        Crank.cpp
+        Crank.h
+        RotationSource.cpp
+        RotationSource.h
+        Shaft.cpp
+        Shaft.h
+        IRotationSink.cpp
+        IRotationSink.h
+        Pulley.cpp
+        Pulley.h
+        Cam.cpp
+        Cam.h
+        IKeyResponder.cpp
+        IKeyResponder.h
+        Machine2Factory.cpp
+        Machine2Factory.h
+        MusicBox.cpp
+        MusicBox.h
 )
 
 find_package(wxWidgets COMPONENTS core base xrc html xml REQUIRED)
