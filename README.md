@@ -1,4 +1,4 @@
-# Portfolio
+# Jay's Portfolio
 See descriptions for file contents below. Thank you for looking!
 
 ## Graphics
