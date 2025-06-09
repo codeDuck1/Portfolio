@@ -1,4 +1,4 @@
-# Portfolio
+# Jay Sifuentes Portfolio
 
 ## Graphics
 * Voxel Octree rendering with destruction in Unity via GPU instancing.
