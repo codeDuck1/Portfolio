@@ -17,5 +17,5 @@ See descriptions for file contents below. Project video and overviews at https:/
 ## Python
 * 2 player battle ship that can be played in CLI. Done for my Python programming class.
 
-## UnityGame
+## Unity Game
 * Sample from turn-based strategy game.
