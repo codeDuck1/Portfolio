@@ -13,3 +13,6 @@
 [submodule "Graphics/LearnOpenGL/FirstOpenGL"]
 	path = Graphics/LearnOpenGL/FirstOpenGL
 	url = https://github.com/jaysdevwork/FirstOpenGL.git
+[submodule "Graphics/3D Engine/3D Engine Repo"]
+	path = Graphics/3D Engine/3D Engine Repo
+	url = https://github.com/jaysdevwork/FirstOpenGL
