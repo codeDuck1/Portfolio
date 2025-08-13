@@ -4,7 +4,7 @@ using Unity.Collections;
 using Unity.Mathematics;
 
 // Initialize octree chunk and setup buffers between compute, vertex, and fragment shaders.
-// Sends updated leaf node data to the compute shader for processing into transform matrices 
+// Sends updated leaf node data to the compute shader for processing into transform (model) matrices 
 // with a color based on node depth. Then, draw call done here!
 public class OctChunk2 : MonoBehaviour
 {
