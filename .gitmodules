@@ -16,3 +16,7 @@
 [submodule "Graphics/3D Engine/3D Engine Repo"]
 	path = Graphics/3D Engine/3D Engine Repo
 	url = https://github.com/jaysdevwork/FirstOpenGL
+[submodule "Graphics/3D Engine/3D Engine Repos"]
+	path = Graphics/3D Engine/3D Engine Repos
+	url = https://github.com/jaysdevwork/FirstOpenGL
+	branch = Tutorial-Branch
