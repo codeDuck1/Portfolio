@@ -18,4 +18,4 @@ See descriptions for file contents below. Project video and overviews at https:/
 * 2 player battle ship that can be played in CLI. Done for my Python programming class.
 
 ## Unity Game
-* Sample from turn-based strategy game.
+* Sample from turn-based strategy game, including Slay the Spire inspired card system.
