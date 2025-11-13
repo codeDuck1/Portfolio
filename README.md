@@ -3,7 +3,7 @@ See descriptions for file contents below. Project video and overviews at https:/
 
 
 ## Graphics
-* 3D Engine using Vulkan, including PBR (Cook-Torrance BRDF, IBL) and core glTF 2.0 scene loading ([Reference](https://vkguide.dev/))
+* 3D Engine using Vulkan, including PBR (Cook-Torrance BRDF, IBL) and core glTF 2.0 scene loading ([Reference](https://vkguide.dev/)).
 * Voxel Octree rendering with destruction in Unity via GPU instancing ([My study explained](https://www.youtube.com/playlist?list=PL8tt7pN2mucBdh5LJ87Y7m0vhGRceN61n)).
 * 3D Engine using OpenGL, including Phong lighting, model loading, draw order transparency, stencil test object outlines, post-processing effects ([Reference](https://learnopengl.com/)).
 
