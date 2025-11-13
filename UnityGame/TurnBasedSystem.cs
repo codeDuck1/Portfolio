@@ -13,14 +13,14 @@ public class TurnBasedSystem : MonoBehaviour
     static private TurnBasedSystem S;
     
     /// Type of the active turn.
-    TurnType currentTurn;
+    private TurnType currentTurn;
 
     /// In-game text displaying remaining turns.
-    public TextMeshProUGUI txt;
+    [SerializeField] private TextMeshProUGUI txt;
 
     /// Combined number of rounds until defeat.
     [Header("Number of rounds until player defeat.")]
-    public int roundsUntilDefeat = 10;
+    [SerializeField] private int roundsUntilDefeat = 10;
 
     /// <summary>
     /// Tracking # of turns of each type taken, as well as total turns.
@@ -34,17 +34,20 @@ public class TurnBasedSystem : MonoBehaviour
     /// Lists of skills to destroy after X turns, set in individual skills.
     /// First add to destroyable list, then handle deletion in rdyToDestroy.
     /// </summary>
-    List<DestroyAfterRounds> destroyableBarriers = new List<DestroyAfterRounds>();
-    List<DestroyAfterRounds> rdyToDestroyBarriers = new List<DestroyAfterRounds>(); 
-    List<DestroyAfterRounds> destroyableAOEs = new List<DestroyAfterRounds>();
-    List<DestroyAfterRounds> rdyToDestroyAOEs = new List<DestroyAfterRounds>(); 
-    
+    private List<DestroyAfterRounds> destroyableBarriers = new List<DestroyAfterRounds>();
+    private List<DestroyAfterRounds> rdyToDestroyBarriers = new List<DestroyAfterRounds>(); 
+    private List<DestroyAfterRounds> destroyableAOEs = new List<DestroyAfterRounds>();
+    private List<DestroyAfterRounds> rdyToDestroyAOEs = new List<DestroyAfterRounds>(); 
+
+    void Awake()
+    {
+       S = this;
+       currentTurn = TurnType.Player;
+    }
     // Start turn type off as player and display turns remaining.
     void Start()
     {
-        S = this;
         S.txt.text = "Turns Left: " + (S.roundsUntilDefeat/2 - S.aiTurnCount);
-        currentTurn = TurnType.Player;
     }
     
     /// Returns true if active turn is AI turn.
